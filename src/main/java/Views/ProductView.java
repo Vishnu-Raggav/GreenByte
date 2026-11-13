@@ -27,14 +27,6 @@ public class ProductView extends JPanel {
                 "ID", "Name", "Category", "Price", "Eco Rating"
         };
 
-        Product[] products = {
-                new Product(1, "Bamboo Planter", "Planters", 1500.00, 5),
-                new Product(2, "Snake Plant", "Indoor Plants", 2500.00, 4),
-                new Product(3, "Coconut Coir Pot", "Planters", 850.00, 5),
-                new Product(4, "Organic Soil Mix", "Gardening", 1200.00, 4),
-                new Product(5, "Peace Lily", "Indoor Plants", 3200.00, 5)
-        };
-
         tableModel = new DefaultTableModel(columns, 0);
         table = new JTable(tableModel);
         table.setRowHeight(30);

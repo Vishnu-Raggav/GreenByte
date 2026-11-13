@@ -23,16 +23,26 @@ public class MainFrame extends JFrame {
         sidebar.setLayout(
                 new BoxLayout(sidebar, BoxLayout.Y_AXIS)
         );
+
         JButton productsBtn = new JButton("Products");
+        JButton stocksBtn = new JButton("Stocks");
+
         sidebar.add(productsBtn);
+        sidebar.add(stocksBtn);
         addButtonActionListener(productsBtn, contentPanel, cardLayout, "products");
+        addButtonActionListener(stocksBtn, contentPanel, cardLayout, "stocks");
 
         // Panels as Cards
         ProductView productView = new ProductView();
         ProductRepository productRepository = new ProductRepository();
         ProductController productController = new ProductController(productView, productRepository);
 
+        StockView stockView = new StockView();
+        StockRepository stockRepository = new StockRepository();
+        StockController stockController = new StockController(stockView, stockRepository, productRepository);
+
         contentPanel.add(productView, "products");
+        contentPanel.add(stockView, "stocks");
 
         JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, sidebar, contentPanel);
         add(splitPane);
