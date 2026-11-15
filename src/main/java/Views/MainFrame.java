@@ -26,11 +26,15 @@ public class MainFrame extends JFrame {
 
         JButton productsBtn = new JButton("Products");
         JButton stocksBtn = new JButton("Stocks");
+        JButton clientsBtn = new JButton("Clients");
 
         sidebar.add(productsBtn);
         sidebar.add(stocksBtn);
+        sidebar.add(clientsBtn);
+
         addButtonActionListener(productsBtn, contentPanel, cardLayout, "products");
         addButtonActionListener(stocksBtn, contentPanel, cardLayout, "stocks");
+        addButtonActionListener(clientsBtn, contentPanel, cardLayout, "clients");
 
         // Panels as Cards
         ProductView productView = new ProductView();
@@ -41,8 +45,13 @@ public class MainFrame extends JFrame {
         StockRepository stockRepository = new StockRepository();
         StockController stockController = new StockController(stockView, stockRepository, productRepository);
 
+        ClientView clientView = new ClientView();
+        ClientRepository clientRepository = new ClientRepository();
+        ClientController clientController = new ClientController(clientView, clientRepository);
+
         contentPanel.add(productView, "products");
         contentPanel.add(stockView, "stocks");
+        contentPanel.add(clientView, "clients");
 
         JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, sidebar, contentPanel);
         add(splitPane);
