@@ -33,16 +33,19 @@ public class MainFrame extends JFrame {
         JButton stocksBtn = new JButton("Stocks");
         JButton clientsBtn = new JButton("Clients");
         JButton ordersBtn = new JButton("Orders");
+        JButton reportsBtn = new JButton("Reports");
 
         sidebar.add(productsBtn);
         sidebar.add(stocksBtn);
         sidebar.add(clientsBtn);
         sidebar.add(ordersBtn);
+        sidebar.add(reportsBtn);
 
         addButtonActionListener(productsBtn, contentPanel, cardLayout, "products");
         addButtonActionListener(stocksBtn, contentPanel, cardLayout, "stocks");
         addButtonActionListener(clientsBtn, contentPanel, cardLayout, "clients");
         addButtonActionListener(ordersBtn, contentPanel, cardLayout, "orders");
+        addButtonActionListener(reportsBtn, contentPanel, cardLayout, "reports");
 
         // Panels as Cards
         ProductView productView = new ProductView();
@@ -61,10 +64,14 @@ public class MainFrame extends JFrame {
         OrderRepository orderRepository = new OrderRepository();
         OrderController orderController = new OrderController(orderView, orderRepository, productRepository);
 
+        ReportView reportView = new ReportView();
+        ReportController reportController = new ReportController(reportView, orderRepository, productRepository, stockRepository);
+
         contentPanel.add(productView, "products");
         contentPanel.add(stockView, "stocks");
         contentPanel.add(clientView, "clients");
         contentPanel.add(orderView, "orders");
+        contentPanel.add(reportView, "reports");
 
         JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, sidebar, contentPanel);
         add(splitPane);
