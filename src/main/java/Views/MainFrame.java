@@ -1,10 +1,15 @@
 package Views;
 
-import Models.*;
-import Controllers.*;
+import java.awt.CardLayout;
 
-import javax.swing.*;
-import java.awt.*;
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JSplitPane;
+
+import Controllers.*;
+import Models.*;
 
 public class MainFrame extends JFrame {
 
@@ -27,14 +32,17 @@ public class MainFrame extends JFrame {
         JButton productsBtn = new JButton("Products");
         JButton stocksBtn = new JButton("Stocks");
         JButton clientsBtn = new JButton("Clients");
+        JButton ordersBtn = new JButton("Orders");
 
         sidebar.add(productsBtn);
         sidebar.add(stocksBtn);
         sidebar.add(clientsBtn);
+        sidebar.add(ordersBtn);
 
         addButtonActionListener(productsBtn, contentPanel, cardLayout, "products");
         addButtonActionListener(stocksBtn, contentPanel, cardLayout, "stocks");
         addButtonActionListener(clientsBtn, contentPanel, cardLayout, "clients");
+        addButtonActionListener(ordersBtn, contentPanel, cardLayout, "orders");
 
         // Panels as Cards
         ProductView productView = new ProductView();
@@ -49,9 +57,14 @@ public class MainFrame extends JFrame {
         ClientRepository clientRepository = new ClientRepository();
         ClientController clientController = new ClientController(clientView, clientRepository);
 
+        OrderView orderView = new OrderView();
+        OrderRepository orderRepository = new OrderRepository();
+        OrderController orderController = new OrderController(orderView, orderRepository, productRepository);
+
         contentPanel.add(productView, "products");
         contentPanel.add(stockView, "stocks");
         contentPanel.add(clientView, "clients");
+        contentPanel.add(orderView, "orders");
 
         JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, sidebar, contentPanel);
         add(splitPane);
