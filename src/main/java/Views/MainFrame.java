@@ -1,10 +1,17 @@
 package Views;
 
-import Models.*;
-import Controllers.*;
+import java.awt.CardLayout;
 
-import javax.swing.*;
-import java.awt.*;
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JSplitPane;
+
+import Controllers.ProductController;
+import Controllers.StockController;
+import Models.ProductRepository;
+import Models.StockRepository;
 
 public class MainFrame extends JFrame {
 
@@ -31,6 +38,9 @@ public class MainFrame extends JFrame {
         sidebar.add(stocksBtn);
         addButtonActionListener(productsBtn, contentPanel, cardLayout, "products");
         addButtonActionListener(stocksBtn, contentPanel, cardLayout, "stocks");
+        JButton ordersBtn = new JButton("Orders");
+sidebar.add(ordersBtn);
+addButtonActionListener(ordersBtn, contentPanel, cardLayout, "orders");
 
         // Panels as Cards
         ProductView productView = new ProductView();
@@ -43,6 +53,10 @@ public class MainFrame extends JFrame {
 
         contentPanel.add(productView, "products");
         contentPanel.add(stockView, "stocks");
+        OrderView orderView = new OrderView();
+        OrderRepository orderRepository = new OrderRepository();
+OrderController orderController = new OrderController(orderView, orderRepository, productRepository);
+contentPanel.add(orderView, "orders");
 
         JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, sidebar, contentPanel);
         add(splitPane);
