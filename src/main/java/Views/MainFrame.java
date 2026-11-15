@@ -60,6 +60,9 @@ public class MainFrame extends JFrame {
         ClientRepository clientRepository = new ClientRepository();
         ClientController clientController = new ClientController(clientView, clientRepository);
 
+        EmailService emailService = new EmailService();
+        ClientNotificationController clientNotificationController = new ClientNotificationController(clientRepository, emailService);
+
         OrderView orderView = new OrderView();
         OrderRepository orderRepository = new OrderRepository();
         OrderController orderController = new OrderController(orderView, orderRepository, productRepository);
