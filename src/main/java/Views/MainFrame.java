@@ -73,6 +73,8 @@ public class MainFrame extends JFrame {
         ReportView reportView = new ReportView();
         ReportController reportController = new ReportController(reportView, orderRepository, productRepository, stockRepository);
 
+        AgentNotificationController agentNotificationController = new AgentNotificationController(orderRepository, clientRepository, emailService);
+
         DeliveryView deliveryView = new DeliveryView();
         DeliveryRepository deliveryRepository = new DeliveryRepository();
         DeliveryController deliveryController = new DeliveryController(deliveryView, deliveryRepository, orderRepository, clientNotificationController);
